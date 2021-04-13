@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } from "react-redux";
 
-function App() {
+const App = (props = []) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Items in array:</h2>
+      <p>
+        {props.items.map((item) => {
+          return (
+            <ul key={item.id}>
+              <li>id: {item.id}</li>
+              <li>Type: {item.type}</li>
+              <li>Sale: {item.value}</li>
+            </ul>
+          );
+        })}
+      </p>
     </div>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    items: state,
+  };
+};
+
+export default connect(mapStateToProps)(App);
